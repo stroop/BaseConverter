@@ -56,7 +56,7 @@ public class ConverterForm {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("ConverterForm");
+        JFrame frame = new JFrame("Converter");
         frame.setContentPane(new ConverterForm().containerPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

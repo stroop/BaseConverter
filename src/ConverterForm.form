@@ -34,7 +34,7 @@
             </constraints>
             <properties>
               <font size="22" style="1"/>
-              <text value="Coverter"/>
+              <text value="Base 2 / 10 / 16 Converter"/>
             </properties>
           </component>
           <component id="9eeca" class="javax.swing.JLabel" binding="promptLabel">
@@ -43,7 +43,7 @@
             </constraints>
             <properties>
               <labelFor value="e043c"/>
-              <text value="Enter number to convert its base below"/>
+              <text value="Enter a number to convert and select its base below"/>
             </properties>
           </component>
         </children>
