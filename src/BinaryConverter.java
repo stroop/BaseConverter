@@ -1,32 +1,47 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by jacobstroop on 9/7/15.
  */
 public class BinaryConverter {
 
+    // constants
+    private final String BIN_REGEX = "[0-1\\s]+";
+
+    // properties
     private String target;
     private char[] binArray;
     private int decimalEquivalent;
     private String hexEquivalent;
+    private boolean isValidTarget;
 
+    // constructors
     public BinaryConverter() {
         super();
     }
 
     public BinaryConverter(String target) {
+
         setTarget(target);
-        setBinArray(target);
-        setDecimalEquivalent();
-        setHexEquivalent();
+        setValidTarget(false);
+        validateTarget();
+
+        if (isValidTarget) {
+            setBinArray(this.target);
+            setDecimalEquivalent();
+            setHexEquivalent();
+        }
     }
 
+    // setters
+
+    public void setValidTarget(boolean isValidTarget) {
+        this.isValidTarget = isValidTarget;
+    }
     public void setTarget(String target) {
         this.target = target;
     }
-
-    public String getTarget() {
-        return target;
-    }
-
     private void setBinArray(String target) {
 
         StringBuilder sb = new StringBuilder(target);
@@ -39,39 +54,10 @@ public class BinaryConverter {
 
         this.binArray = sb.toString().toCharArray();
     }
-
     private void setDecimalEquivalent() {
 
         this.decimalEquivalent = calcDecimal(binArray);
     }
-
-    // calculates base 10 value from base 2
-    private int calcDecimal(char[] bits) {
-
-        // running total
-        int dec = 0;
-
-        // loop char array
-        for (int i=0; i<bits.length; i++) {
-
-            // if bit is on, calculate value and add to dec
-            if (bits[i] == '1') {
-
-                // value of on bit is equal 2 to the power
-                // of its position in the array plus 1
-                dec += Math.pow(2, (bits.length-(i+1)));
-            }
-        }
-
-        // return final value of dec
-        return dec;
-    }
-
-    public int getDecimalEquivalent() {
-        return decimalEquivalent;
-    }
-
-
     private void setHexEquivalent() {
 
         StringBuilder sb = new StringBuilder();
@@ -115,7 +101,60 @@ public class BinaryConverter {
 
     } // end setHex method
 
+    // getters
+
+    public boolean isValidTarget() {
+        return isValidTarget;
+    }
+    public String getTarget() {
+        return target;
+    }
+    public String getDecimalEquivalent() {
+        return String.valueOf(decimalEquivalent);
+    }
     public String getHexEquivalent() {
         return hexEquivalent;
     }
+
+    // helper methods
+
+    public void validateTarget() {
+
+        // validate input, ignore spaces
+        Pattern binRegex = Pattern.compile(BIN_REGEX);
+        Matcher binMatcher = binRegex.matcher(this.target);
+
+        if (binMatcher.matches()) {
+            this.isValidTarget = true;
+            this.target = this.target.replaceAll("\\s+","");
+        }
+    }
+
+    // calculates base 10 value from base 2
+    private int calcDecimal(char[] bits) {
+
+        // running total
+        int dec = 0;
+
+        // loop char array
+        for (int i=0; i<bits.length; i++) {
+
+            // if bit is on, calculate value and add to dec
+            if (bits[i] == '1') {
+
+                // value of on bit is equal 2 to the power
+                // of its position in the array plus 1
+                dec += Math.pow(2, (bits.length-(i+1)));
+            }
+        }
+
+        // return final value of dec
+        return dec;
+    }
+
+
+
+
+
+
 }

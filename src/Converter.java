@@ -28,7 +28,11 @@ public class Converter {
     }
 
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
+
+
+
+
 
         Scanner in = new Scanner(System.in);
 
@@ -46,5 +50,5 @@ public class Converter {
 
         System.exit(0);
 
-    }
+    }*/
 }
